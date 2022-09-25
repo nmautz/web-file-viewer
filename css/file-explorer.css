@@ -1,6 +1,14 @@
 .file-display-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+}
+
+.file-display:hover{
+  background-color: rgb(224, 224, 224);
+  border-radius: 25px;
+  margin: unset;
+  
 }
 
 
@@ -9,6 +17,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 10%;
+  transition: all ease-in-out 100ms;
 }
 
 .file-icon-img {
