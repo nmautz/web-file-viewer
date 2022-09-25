@@ -20,7 +20,7 @@ function addFileToDisplay(fileName, fileType){
     fileimg.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoGPVwsAvKzaV-3R2clNWpIL09WdLcUQptb0DAu5TW9w&s";
 
   }
-  fileimg.alt = "Folder"
+  fileimg.alt = "Folder/File"
   var filetxt = document.createElement("p");
   filetxt.appendChild(document.createTextNode(fileName));
   filetxt.classList.add("file-txt");
@@ -28,12 +28,16 @@ function addFileToDisplay(fileName, fileType){
   fileDiv.appendChild(fileimg);
   fileDiv.appendChild(filetxt);
 
-  parent.appendChild(fileDiv);
+  if(fileType == "folder"){
+    parent.insertBefore(fileDiv, parent.firstChild);
+  }else{
+    parent.appendChild(fileDiv);
+  }
+  
 
   fileDiv.addEventListener("click", function(){
 
     cd(fileName);
-    displayFiles();
 
   })
 
@@ -130,7 +134,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     cd("../.");
-    displayFiles();
 
   })
 
