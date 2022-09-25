@@ -82,9 +82,12 @@ function cd(path){
   let url = `${domain}:${port}/api/cd?path=${path}`;
   window.fetch(url, {
     method: 'GET'
-  }).then(()=>{
-    displayFiles();
-
+  }).then(res => res.text()).then((data)=>{
+    if(data == "OK"){
+      displayFiles();
+    }else{
+      console.log(data);
+    }
   })
 }
 
