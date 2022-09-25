@@ -73,6 +73,9 @@ function cd(path){
   let url = `${domain}:${port}/api/cd?path=${path}`;
   window.fetch(url, {
     method: 'GET'
+  }).then(()=>{
+    displayFiles();
+
   })
 }
 
@@ -111,6 +114,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
   addbtn.addEventListener("click", ()=>{
 
     addFileStaging();
+
+  })
+
+  backbtn = document.getElementById("back-button");
+  backbtn.addEventListener("click", ()=>{
+
+
+    cd("../.");
+    displayFiles();
 
   })
 

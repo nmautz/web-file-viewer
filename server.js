@@ -43,10 +43,16 @@ app.get('/api/addFile', function(req, res){
 
 app.get('/api/cd', function(req,res){
 
-  console.log("Current Dir: " + process.cwd());
-  process.chdir(req.query.path);
-  console.log("Updated Dir: " + process.cwd());
+  console.log("Old Dir: " + process.cwd());
+  try{
+    process.chdir(req.query.path);
+    res.write("OK");
+  }catch (e){
+    res.write("ERROR: " + e);
+  }
 
+  console.log("Updated Dir: " + process.cwd());
+  res.end();
 
 
 })
