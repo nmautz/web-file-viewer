@@ -12,11 +12,16 @@ app.use(cors({
 
 app.get('/api/getfiles', function(req, res){
 
-  var filenames = [];
+  var filenames = []
   if(req.url === '/api/getfiles'){
 
+
     fs.readdirSync("./").forEach(file => {
-      filenames.push(file);
+      var isDir = false;
+      if(fs.lstatSync(file).isDirectory()){
+        isDir = true;
+      }
+      filenames.push({path: file, isDir: isDir});
     });
     res.write(JSON.stringify(filenames));
     res.end();

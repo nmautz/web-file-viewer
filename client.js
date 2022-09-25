@@ -14,7 +14,12 @@ function addFileToDisplay(fileName, fileType){
   fileDiv.classList.add("file-display");
   var fileimg = document.createElement("img");
   fileimg.classList.add("file-icon-img");
-  fileimg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1200px-OneDrive_Folder_Icon.svg.png";
+  if(fileType == 'folder'){
+    fileimg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1200px-OneDrive_Folder_Icon.svg.png";
+  }else{
+    fileimg.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoGPVwsAvKzaV-3R2clNWpIL09WdLcUQptb0DAu5TW9w&s";
+
+  }
   fileimg.alt = "Folder"
   var filetxt = document.createElement("p");
   filetxt.appendChild(document.createTextNode(fileName));
@@ -94,7 +99,10 @@ function displayFiles(){
 
 
     for(i = 0; i < data.length; ++i){
-      addFileToDisplay(data[i], "folder")
+      if(data[i].isDir){
+        addFileToDisplay(data[i].path, "folder");
+      }
+      addFileToDisplay(data[i].path, "file");
 
     }
     
