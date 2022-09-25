@@ -1,0 +1,21 @@
+.file-display-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+.file-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-icon-img {
+
+  width: 40%;
+}
+
+.file-text {
+  color: green;
+}

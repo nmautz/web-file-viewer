@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     console.log(data + ":data");
-    document.getElementById("test").innerHTML = data;
     
 
   });
