@@ -1,3 +1,12 @@
+var domain = window.location.origin; //http://someurl.com
+var tmp = new URL(domain);
+tmp.port = '';
+domain = tmp.toString();
+domain = domain.substring(0, domain.length-1);
+
+let port = 3000;
+
+
 function addFileToDisplay(fileName, fileType){
   let parent = document.getElementById("main-display-container");
 
@@ -20,14 +29,17 @@ function addFileToDisplay(fileName, fileType){
 }
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
-  var domain = window.location.origin; //http://someurl.com
-  var tmp = new URL(domain);
-  tmp.port = '';
-  domain = tmp.toString();
-  domain = domain.substring(0, domain.length-1);
 
-  let port = 3000;
+function addFile(name){
+
+  let url = `${domain}:${port}/api/addFile?name=${name}`;
+  window.fetch(url, {
+    method: 'GET'
+  })
+}
+
+function displayFiles(){
+
   let url = `${domain}:${port}/api/getfiles`;
   window.fetch(url, {
     method: 'GET'
@@ -41,6 +53,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
 
   });
+}
 
+document.addEventListener("DOMContentLoaded", ()=>{
+
+
+  addbtn = document.getElementById("add-file-button");
+
+  addbtn.addEventListener("click", ()=>{
+
+    addFile('test');
+
+  })
+
+
+  displayFiles();
 })
+
+
+
 
