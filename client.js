@@ -25,6 +25,13 @@ function addFileToDisplay(fileName, fileType){
 
   parent.appendChild(fileDiv);
 
+  fileDiv.addEventListener("click", function(){
+
+    cd(fileName);
+    displayFiles();
+
+  })
+
 
 }
 function addFileStaging(){
@@ -61,7 +68,21 @@ function addFile(name){
   })
 }
 
+function cd(path){
+
+  let url = `${domain}:${port}/api/cd?path=${path}`;
+  window.fetch(url, {
+    method: 'GET'
+  })
+}
+
 function displayFiles(){
+
+  var maindisplay = document.getElementById("main-display-container");
+  while (maindisplay.firstChild){
+    maindisplay.removeChild(maindisplay.lastChild);
+    console.log("inf")
+  }
 
   let url = `${domain}:${port}/api/getfiles`;
   window.fetch(url, {

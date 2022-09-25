@@ -1,7 +1,7 @@
 
 const fs = require("fs");
 const cors = require("cors")
-
+const process = require('process');
 
 var express = require('express');
 var app = express();
@@ -38,6 +38,16 @@ app.get('/api/addFile', function(req, res){
   res.end();
 
   
+
+})
+
+app.get('/api/cd', function(req,res){
+
+  console.log("Current Dir: " + process.cwd());
+  process.chdir(req.query.path);
+  console.log("Updated Dir: " + process.cwd());
+
+
 
 })
 
