@@ -86,6 +86,7 @@ function cd(path){
     if(data == "OK"){
       displayFiles();
     }else{
+      const alert = document.getElementById("error-alert");
       console.log(data);
     }
   })
@@ -108,8 +109,9 @@ function displayFiles(){
     for(i = 0; i < data.length; ++i){
       if(data[i].isDir){
         addFileToDisplay(data[i].path, "folder");
+      }else{
+        addFileToDisplay(data[i].path, "file");
       }
-      addFileToDisplay(data[i].path, "file");
 
     }
     

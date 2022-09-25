@@ -19,3 +19,29 @@
 html{
   margin-top: 5%;
 }
+
+#error-alert{
+  position: absolute;
+  background-color: black;
+  top: 34%;
+  left: 34%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 30%;
+  width: 30%;
+  font-size: x-large;
+  border-color: black;
+  border-style: solid;
+  border-radius: 25px;
+  border-width: 15px;
+  transition: all ease-in-out 100ms;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+}
+#error-text{
+  color:white;
+  text-align: center;
+}
