@@ -1,8 +1,10 @@
-
+// install
+//npm install archiver --save
+//Require
 const fs = require("fs");
 const cors = require("cors")
 const process = require('process');
-
+archiver = require('archiver');
 var express = require('express');
 var app = express();
 
@@ -85,12 +87,27 @@ app.get('/api/cd', function(req,res){
 
 app.get('/api/download', function(req,res){
 
+  var isDir = false;
   try{
+    if(fs.lstatSync(req.query.path).isDirectory()){
+      isDir = true;
+    }
+  }catch(e){
+    console.log(e);
+  }
 
+
+  path = req.query.path;
+  console.log(path)
+  try{
+    if(isDir){
+      zip(path)
+      path = path + `/${path}.zip`
+    }
     //req.query.path
-    console.log(req.query.path)
+    console.log(path)
     var data =null
-    var file = fs.readFileSync(req.query.path, "binary");
+    var file = fs.readFileSync(path, "binary");
 
    
     res.write(file, "binary");
@@ -107,6 +124,19 @@ app.get('/api/download', function(req,res){
 
 })
 
+function zip(path){
+  // init
+  var output = fs.createWriteStream(path + `/${path}.zip`);
+  var archive = archiver('zip', { zlib: { level: 9 } });
+  archive.pipe(output);
+
+  // callback
+  output.on('close', () => { console.log('callback when everything is finished'); });
+
+  // append files / folders
+
+  archive.finalize();
+}
 
 app.listen(3000);
 
