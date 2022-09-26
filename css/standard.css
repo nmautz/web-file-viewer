@@ -47,6 +47,7 @@ html{
   align-items: center;
   justify-content: center;
 
+  z-index: 100;
 }
 #error-text{
   color:white;
