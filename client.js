@@ -50,9 +50,10 @@ function addFileToDisplay(fileName, fileType){
   }
 
 
-  deletebtn.addEventListener("click",()=>{
+  deletebtn.addEventListener("click",(e)=>{
 
     deletefile(fileName, fileType);
+    e.preventDefault;
 
   })
 
@@ -98,6 +99,7 @@ function addFileToDisplay(fileName, fileType){
 
 
 function deletefile(fileName, fileType){
+  console.log("DELETE")
   let url = `${domain}:${port}/api/deletefile?path=${fileName}&type=${fileType}`;
   window.fetch(url, {
     method: 'GET'
@@ -145,6 +147,7 @@ function addFileStaging(icon){
 
 function addFile(name){
 
+  console.log("ADDFILE")
   let url = `${domain}:${port}/api/addFile?name=${name}`;
   window.fetch(url, {
     method: 'GET'
@@ -161,6 +164,7 @@ function addFile(name){
 
 function cd(path){
 
+  console.log("CD")
   let url = `${domain}:${port}/api/cd?path=${path}`;
   window.fetch(url, {
     method: 'GET'
@@ -201,6 +205,7 @@ function download(path){
 }
 
 function addFolder(path){
+  console.log("FOLDER")
   let url = `${domain}:${port}/api/addFolder?path=${path}`;
   window.fetch(url, {
     method: 'GET'
@@ -228,6 +233,8 @@ function generate_alert(data) {
 }
 
 function displayFiles(){
+  console.log("Display");
+
   selected = null;
 
   var maindisplay = document.getElementById("main-display-container");
@@ -288,6 +295,7 @@ function zipFolder(path){
 }
 
 
+var firstTime = true
 
 document.addEventListener("DOMContentLoaded", ()=>{
 
@@ -344,8 +352,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
   })
 
 
-  displayFiles();
+  if(firstTime){
+    displayFiles();
+    firstTime = false;
+  }
+
+
 })
+
+
 
 
 
@@ -401,3 +416,5 @@ function downloadWithProgress(path, isDir) {
     );
   };
 }
+
+
