@@ -118,7 +118,8 @@ function addFile(name){
   window.fetch(url, {
     method: 'GET'
   }).then(res=>res.text()).then((data)=>{
-    if(data != "OK"){
+    if(data != "OK" && data != ""){
+      console.log(data);
       generate_alert(data);
 
     }
