@@ -74,6 +74,14 @@ function addFile(name){
   let url = `${domain}:${port}/api/addFile?name=${name}`;
   window.fetch(url, {
     method: 'GET'
+  }).then(res=>res.text()).then((data)=>{
+    if(data != "OK"){
+      generate_alert(data);
+
+    }
+    displayFiles();
+
+
   })
 }
 
@@ -86,18 +94,22 @@ function cd(path){
     if(data == "OK"){
       displayFiles();
     }else{
-      const alert = document.getElementById("error-alert");
-      const alerttext = document.getElementById("error-text");
-      alert.style.display = "flex";
-      alerttext.innerHTML = data;
-      setTimeout(()=>{
-        alert.style.display= "none";
-
-
-      }, 1500);
-      console.log(data);
+      generate_alert(data);
     }
   })
+}
+
+function generate_alert(data) {
+  const alert = document.getElementById("error-alert");
+  const alerttext = document.getElementById("error-text");
+  alert.style.display = "flex";
+  alerttext.innerHTML = data;
+  setTimeout(() => {
+    alert.style.display = "none";
+
+
+  }, 1500);
+  console.log(data);
 }
 
 function displayFiles(){
