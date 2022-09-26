@@ -6,6 +6,7 @@ domain = domain.substring(0, domain.length-1);
 
 let port = 3000;
 
+var selected = null;
 
 function addFileToDisplay(fileName, fileType){
   let parent = document.getElementById("main-display-container");
@@ -37,6 +38,20 @@ function addFileToDisplay(fileName, fileType){
 
   fileDiv.addEventListener("click", function(){
 
+    if(fileDiv == selected){
+      selected = null;
+      fileDiv.classList.remove("selected");
+    }else if(selected!= null){
+      selected.classList.remove("selected");
+      selected = fileDiv;
+      fileDiv.classList.add("selected");
+    }else{
+      selected = fileDiv;
+      fileDiv.classList.add("selected");
+    }
+
+  })
+  fileDiv.addEventListener("dblclick", function(){
     cd(fileName);
 
   })
