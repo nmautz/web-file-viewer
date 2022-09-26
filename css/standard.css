@@ -24,7 +24,7 @@
 
 }
 html{
-  margin-top: 5%;
+  margin-top: 100px;
 }
 
 #error-alert{
@@ -52,3 +52,4 @@ html{
   color:white;
   text-align: center;
 }
+

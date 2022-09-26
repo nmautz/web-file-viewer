@@ -13,6 +13,7 @@
 
 
 .file-display {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,8 +27,36 @@
   width: 40%;
 }
 
+
 .selected{
   background-color: rgb(72, 72, 255) !important;
   border-radius: 25px;
   margin: 5% ;
+}
+.file-text {
+
+}
+
+.file-name-input {
+  
+}
+
+
+.delete-btn{
+  position: absolute;
+  top: 0px;
+  right: 30%;
+  background-color: rgb(238, 238, 238);
+  border-radius: 25px;
+  display: none;
+
+}
+
+.file-display:hover  .delete-btn {
+  display: block;
+
+}
+.delete-btn:hover{
+  cursor: pointer;
+
 }
