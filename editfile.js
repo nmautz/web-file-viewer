@@ -30,6 +30,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
     getFileContents(path);
 
 
+    const backbtn = document.getElementById("back-to-explorer-button");
+    const savebtn = document.getElementById("save-button");
+
+    backbtn.addEventListener("click", ()=>{
+        window.location.href="./index.html";
+    })
+
+    savebtn.addEventListener("click", ()=>{
+        const tarea = document.getElementById("edit-text-area");
+
+        updateFile(path, tarea.innerHTML)
+
+    })
+
+    
 
 
 })

@@ -164,7 +164,15 @@ function addFile(name){
   })
 }
 
+function updateFile(path, newContents){
 
+  let url = `${domain}:${port}/api/updateFile?path=${path}&contents=${newContents}`;
+  window.fetch(url, {
+    method: 'GET'
+  }).then(res => res.text()).then((data)=>{
+    generate_alert(data);
+  })
+}
 
 function cd(path){
 
