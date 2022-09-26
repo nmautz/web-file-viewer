@@ -149,29 +149,30 @@ app.get("/api/zip", (req,res)=>{
 
   console.log(req.query.path)
   try{
-    zip(req.query.path);
-    res.write("OK");
+    zip(req.query.path, {"res": res});
   }catch (e){
     res.write("ERROR:" + e);
+    res.end()
 
   }
 
  
-  res.end()
   
 
 
 })
 
 
-function zip(path){
+function zip(path, resObj){
   // init
   var output = fs.createWriteStream(`${path}.zip`);
   var archive = archiver('zip', { zlib: { level: 9 } });
   archive.pipe(output);
 
   // callback
-  output.on('close', () => {     
+  output.on('close', () => {   
+    resObj["res"].write("OK");
+    resObj["res"].end()  
   });
 
   // append files / folders

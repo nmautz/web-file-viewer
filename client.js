@@ -150,7 +150,6 @@ function addFile(name){
     method: 'GET'
   }).then(res=>res.text()).then((data)=>{
     if(data != "OK" && data != ""){
-      console.log(data);
       generate_alert(data);
 
     }
@@ -179,7 +178,6 @@ function openFileBrowser() {
   input.type = 'file';
   input.onchange = _this => {
             let files =   Array.from(input.files);
-            console.log(files);
         };
   input.click();
 }
@@ -235,7 +233,6 @@ function displayFiles(){
   var maindisplay = document.getElementById("main-display-container");
   while (maindisplay.firstChild){
     maindisplay.removeChild(maindisplay.lastChild);
-    console.log("inf")
   }
 
   let url = `${domain}:${port}/api/getfiles`;
@@ -319,7 +316,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     var isDir = false;
-    console.log(selected.children[1].src)
     if(selected.children[1].src == folder_icon){
       
       isDir = true;
