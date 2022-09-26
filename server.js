@@ -93,7 +93,7 @@ app.get('/api/download', function(req,res){
 
   try{
 
-      var file = fs.readFileSync(path, "binary");
+      var file = fs.readFileSync(req.query.path, "binary");
 
     
       res.write(file, "binary");
