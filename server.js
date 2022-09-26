@@ -70,7 +70,7 @@ app.get('/api/addFolder', function(req,res){
 app.get('/api/pwd', (req, res)=>{
 
   try{
-    res.write(__dirname);
+    res.write(process.cwd());
   }catch(e){
     res.write("ERROR: " + e);
   }

@@ -255,7 +255,25 @@ function displayFiles(){
     
 
   });
+
+  updatePath();
+
+
+
 }
+
+
+function updatePath(){
+  let url = `${domain}:${port}/api/pwd`;
+  window.fetch(url, {
+    method: 'GET'
+  }).then(res => res.text()).then((data)=>{
+    const path = document.getElementById("path");
+    path.innerHTML = data;
+  })
+
+}
+
 
 function zipFolder(path){
   let url = `${domain}:${port}/api/zip?path=${path}`
