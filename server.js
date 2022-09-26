@@ -6,6 +6,7 @@ const cors = require("cors")
 const process = require('process');
 archiver = require('archiver');
 var express = require('express');
+const path = require("path");
 var app = express();
 
 app.use(cors({
@@ -87,33 +88,17 @@ app.get('/api/cd', function(req,res){
 
 app.get('/api/download', function(req,res){
 
-  var isDir = false;
+
+
+
   try{
-    if(fs.lstatSync(req.query.path).isDirectory()){
-      isDir = true;
-    }
-  }catch(e){
-    console.log(e);
-  }
 
+      var file = fs.readFileSync(path, "binary");
 
-  path = req.query.path;
-  console.log(path)
-  try{
-    if(isDir){
-      zip(path)
-      path = path + `/${path}.zip`
-    }
-    //req.query.path
-    console.log(path)
-    var data =null
-    var file = fs.readFileSync(path, "binary");
-
-   
-    res.write(file, "binary");
-    res.end();
-
-
+    
+      res.write(file, "binary");
+      res.end();
+    
   }catch (e){
     console.log("ERROR: " + e);
     res.write("ERROR: " + e);
@@ -124,14 +109,35 @@ app.get('/api/download', function(req,res){
 
 })
 
+
+app.get("/api/zip", (req,res)=>{
+
+  console.log(req.query.path)
+  try{
+    zip(req.query.path);
+    res.write("OK");
+  }catch (e){
+    res.write("ERROR:" + e);
+
+  }
+
+ 
+  res.end()
+  
+
+
+})
+
+
 function zip(path){
   // init
-  var output = fs.createWriteStream(path + `/${path}.zip`);
+  var output = fs.createWriteStream(`${path}.zip`);
   var archive = archiver('zip', { zlib: { level: 9 } });
   archive.pipe(output);
 
   // callback
-  output.on('close', () => { console.log('callback when everything is finished'); });
+  output.on('close', () => {     
+  });
 
   // append files / folders
   // append files from a sub-directory, putting its contents at the root of archive

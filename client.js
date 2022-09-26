@@ -8,6 +8,10 @@ let port = 3000;
 
 var selected = null;
 
+let folder_icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1200px-OneDrive_Folder_Icon.svg.png";
+let file_icon = "https://cdn-icons-png.flaticon.com/512/124/124837.png";
+
+
 function addFileToDisplay(fileName, fileType){
   let parent = document.getElementById("main-display-container");
   
@@ -22,9 +26,9 @@ function addFileToDisplay(fileName, fileType){
   var fileimg = document.createElement("img");
   fileimg.classList.add("file-icon-img");
   if(fileType == 'folder'){
-    fileimg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1200px-OneDrive_Folder_Icon.svg.png";
+    fileimg.src = folder_icon;
   }else{
-    fileimg.src = "https://cdn-icons-png.flaticon.com/512/124/124837.png";
+    fileimg.src = file_icon;
 
   }
   fileimg.alt = "Folder/File"
@@ -96,8 +100,8 @@ function addFileStaging(){
   fileDiv.classList.add("file-display");
   var fileimg = document.createElement("img");
   fileimg.classList.add("file-icon-img");
-  fileimg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1200px-OneDrive_Folder_Icon.svg.png";
-  fileimg.alt = "Folder"
+  fileimg.src = file_icon;
+  fileimg.alt = "File"
   var filenameinput = document.createElement("input");
   filenameinput.classList.add("file-name-input");
 
@@ -214,7 +218,21 @@ function displayFiles(){
   });
 }
 
+function zipFolder(path){
+  let url = `${domain}:${port}/api/zip?path=${path}`
 
+  window.fetch(url, {
+    method: 'GET'
+  }).then(res => res.text()).then((data)=>{
+    if(data == "OK"){
+      downloadWithProgress(`${path}.zip`)
+    }else{
+      generate_alert(data);
+    }
+  })
+
+
+}
 
 
 
@@ -240,7 +258,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   downloadbtn.addEventListener("click", ()=>{
 
-    downloadWithProgress(selected.id);
+    var isDir = false;
+    console.log(selected.children[1].src)
+    if(selected.children[1].src == folder_icon){
+      
+      isDir = true;
+      zipFolder(selected.id);
+    }else{
+      downloadWithProgress(selected.id, isDir);
+    }
+   
 
   })
 
@@ -251,7 +278,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
 
-function downloadWithProgress(path) {
+function downloadWithProgress(path, isDir) {
   //Function from Stan Georgian
 
   let IMG_URL = `${domain}:${port}/api/download?path=${path}`; //except this line 
@@ -270,7 +297,16 @@ function downloadWithProgress(path) {
 
       const anchor = document.createElement("a");
       anchor.href = imageURL;
-      anchor.download = path;
+
+      if(isDir){
+        anchor.download = path + `/${path}.zip`;
+
+      }else{
+        
+        anchor.download = path;
+
+      }
+
       document.body.appendChild(anchor);
       anchor.click();
     }
