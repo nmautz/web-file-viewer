@@ -51,6 +51,22 @@ app.get('/api/addFile', function(req, res){
 
 })
 
+app.get('/api/deletefile', function(req, res){
+
+  try{
+    fs.unlinkSync("./"+req.query.path);
+    res.write("OK");
+
+  }catch(e){
+    res.write("ERROR: " +e);
+  }
+
+  res.end();
+
+  
+
+})
+
 app.get('/api/cd', function(req,res){
 
   console.log("Old Dir: " + process.cwd());
