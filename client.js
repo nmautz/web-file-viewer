@@ -87,6 +87,14 @@ function cd(path){
       displayFiles();
     }else{
       const alert = document.getElementById("error-alert");
+      const alerttext = document.getElementById("error-text");
+      alert.style.display = "flex";
+      alerttext.innerHTML = data;
+      setTimeout(()=>{
+        alert.style.display= "none";
+
+
+      }, 1500);
       console.log(data);
     }
   })
