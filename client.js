@@ -10,6 +10,8 @@ var selected = null;
 
 let folder_icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/1200px-OneDrive_Folder_Icon.svg.png";
 let file_icon = "https://cdn-icons-png.flaticon.com/512/124/124837.png";
+let zip_icon = "https://cdn-icons-png.flaticon.com/512/28/28814.png";
+let download_icon = "https://cdn-icons-png.flaticon.com/512/109/109609.png";
 
 
 function addFileToDisplay(fileName, fileType){
@@ -65,6 +67,14 @@ function addFileToDisplay(fileName, fileType){
     }else{
       selected = fileDiv;
       fileDiv.classList.add("selected");
+    }
+
+    var  downloadicon = document.getElementById("download-button");
+    if(selected.children[1].src == folder_icon){
+      downloadicon.src = zip_icon;
+    }else{
+      downloadicon.src = download_icon;
+
     }
 
   })
@@ -225,7 +235,6 @@ function zipFolder(path){
     method: 'GET'
   }).then(res => res.text()).then((data)=>{
     if(data == "OK"){
-      downloadWithProgress(`${path}.zip`)
     }else{
       generate_alert(data);
     }
@@ -257,6 +266,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   })
 
   downloadbtn.addEventListener("click", ()=>{
+
 
     var isDir = false;
     console.log(selected.children[1].src)
