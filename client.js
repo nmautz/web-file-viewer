@@ -10,6 +10,10 @@ let port = 3000;
 function addFileToDisplay(fileName, fileType){
   let parent = document.getElementById("main-display-container");
 
+  var deletebtn = document.createElement("p");
+  deletebtn.classList.add("delete-btn")
+  deletebtn.appendChild(document.createTextNode("X"));
+
   var fileDiv = document.createElement("div");
   fileDiv.classList.add("file-display");
   var fileimg = document.createElement("img");
@@ -25,6 +29,7 @@ function addFileToDisplay(fileName, fileType){
   filetxt.appendChild(document.createTextNode(fileName));
   filetxt.classList.add("file-txt");
 
+  fileDiv.appendChild(deletebtn);
   fileDiv.appendChild(fileimg);
   fileDiv.appendChild(filetxt);
 
