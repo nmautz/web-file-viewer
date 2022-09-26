@@ -83,5 +83,30 @@ app.get('/api/cd', function(req,res){
 
 })
 
+app.get('/api/download', function(req,res){
+
+  try{
+
+    //req.query.path
+    console.log(req.query.path)
+    var data =null
+    var file = fs.readFileSync(req.query.path, "binary");
+
+   
+    res.write(file, "binary");
+    res.end();
+
+
+  }catch (e){
+    console.log("ERROR: " + e);
+    res.write("ERROR: " + e);
+  }
+
+  res.end();
+
+
+})
+
+
 app.listen(3000);
 
