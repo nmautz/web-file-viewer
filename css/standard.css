@@ -16,6 +16,13 @@
   height: 70%;
   align-self: center;
 }
+.toolbar-icon-img:hover{
+
+  transition: all ease-in-out 100ms;
+  opacity: 20%;
+
+
+}
 html{
   margin-top: 5%;
 }
