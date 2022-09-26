@@ -72,6 +72,16 @@ function addFileToDisplay(fileName, fileType){
 
 
 function deletefile(fileName){
+  let url = `${domain}:${port}/api/deletefile?path=${fileName}`;
+  window.fetch(url, {
+    method: 'GET'
+  }).then(res => res.text()).then((data)=>{
+    if(data == "OK"){
+      displayFiles();
+    }else{
+      generate_alert(data);
+    }
+  })
 
 }
 
