@@ -49,8 +49,21 @@ app.get('/api/addFile', function(req, res){
   }); 
 
   res.end();
+})
 
-  
+
+app.get('/api/addFolder', function(req,res){
+
+  try{
+    if (!fs.existsSync(req.query.path)){
+      fs.mkdirSync(req.query.path);
+    }
+    res.write("OK");
+  }catch(e){
+    res.write("ERROR: " + e)
+  }
+  res.end();
+
 
 })
 

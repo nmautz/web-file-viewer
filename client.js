@@ -1,3 +1,4 @@
+
 var domain = window.location.origin; //http://someurl.com
 var tmp = new URL(domain);
 tmp.port = '';
@@ -110,21 +111,26 @@ function deletefile(fileName){
 }
 
 
-function addFileStaging(){
+function addFileStaging(icon){
   let parent = document.getElementById("main-display-container");
 
   var fileDiv = document.createElement("div");
   fileDiv.classList.add("file-display");
   var fileimg = document.createElement("img");
   fileimg.classList.add("file-icon-img");
-  fileimg.src = file_icon;
+  fileimg.src = icon;
   fileimg.alt = "File"
   var filenameinput = document.createElement("input");
   filenameinput.classList.add("file-name-input");
 
   filenameinput.addEventListener("focusout", ()=>{
 
-    addFile(filenameinput.value);
+    if(icon == folder_icon){
+      addFolder(filenameinput.value);
+    }else{
+      addFile(filenameinput.value);
+
+    }
 
   })
 
@@ -195,6 +201,20 @@ function download(path){
   })*/
 }
 
+function addFolder(path){
+  let url = `${domain}:${port}/api/addFolder?path=${path}`;
+  window.fetch(url, {
+    method: 'GET'
+  }).then(res => res.text()).then((data)=>{
+    if(data == "OK"){
+      displayFiles();
+    }else{
+      generate_alert(data);
+    }
+  })
+
+}
+
 function generate_alert(data) {
   const alert = document.getElementById("error-alert");
   const alerttext = document.getElementById("error-text");
@@ -261,7 +281,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   addbtn.addEventListener("click", ()=>{
 
-    addFileStaging();
+    addFileStaging(file_icon);
 
   })
 
@@ -272,6 +292,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     cd("../.");
 
   })
+
+
+
 
   downloadbtn.addEventListener("click", ()=>{
 
@@ -286,6 +309,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
       downloadWithProgress(selected.id, isDir);
     }
    
+
+  })
+
+  addFolderbtn = document.getElementById("add-folder-button");
+  addFolderbtn.addEventListener("click", ()=>{
+    addFileStaging(folder_icon);
+
 
   })
 
