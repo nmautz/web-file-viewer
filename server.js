@@ -70,11 +70,20 @@ app.get('/api/addFolder', function(req,res){
 app.get('/api/deletefile', function(req, res){
 
   try{
-    fs.unlinkSync("./"+req.query.path);
+
+    if(req.query.type == 'folder'){
+      fs.rmdirSync(req.query.path);
+
+    }else{
+      fs.unlinkSync("./"+req.query.path);
+    }
     res.write("OK");
+
+ 
 
   }catch(e){
     res.write("ERROR: " +e);
+    console.log("ERROR: " +e);
   }
 
   res.end();

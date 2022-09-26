@@ -52,7 +52,8 @@ function addFileToDisplay(fileName, fileType){
 
   deletebtn.addEventListener("click",()=>{
 
-    deletefile(fileName);
+    deletefile(fileName, fileType);
+
   })
 
 
@@ -96,8 +97,8 @@ function addFileToDisplay(fileName, fileType){
 }
 
 
-function deletefile(fileName){
-  let url = `${domain}:${port}/api/deletefile?path=${fileName}`;
+function deletefile(fileName, fileType){
+  let url = `${domain}:${port}/api/deletefile?path=${fileName}&type=${fileType}`;
   window.fetch(url, {
     method: 'GET'
   }).then(res => res.text()).then((data)=>{
