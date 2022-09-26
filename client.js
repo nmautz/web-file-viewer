@@ -269,7 +269,7 @@ function updatePath(){
     method: 'GET'
   }).then(res => res.text()).then((data)=>{
     const path = document.getElementById("path");
-    path.innerHTML = data;
+    path.value = data;
   })
 
 }
@@ -324,6 +324,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       
       isDir = true;
       zipFolder(selected.id);
+      displayFiles();
     }else{
       downloadWithProgress(selected.id, isDir);
     }
@@ -335,6 +336,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
   addFolderbtn.addEventListener("click", ()=>{
     addFileStaging(folder_icon);
 
+
+  })
+
+
+  pathinput = document.getElementById("path");
+  pathinput.addEventListener('focusout', ()=>{
+
+    cd(pathinput.value);
 
   })
 
