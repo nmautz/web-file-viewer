@@ -67,6 +67,19 @@ app.get('/api/addFolder', function(req,res){
 
 })
 
+app.get('/api/pwd', (req, res)=>{
+
+  try{
+    res.write(__dirname);
+  }catch(e){
+    res.write("ERROR: " + e);
+  }
+
+  res.end();
+
+
+})
+
 app.get('/api/deletefile', function(req, res){
 
   try{
