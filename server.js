@@ -18,9 +18,14 @@ app.get('/api/getfiles', function(req, res){
 
     fs.readdirSync("./").forEach(file => {
       var isDir = false;
-      if(fs.lstatSync(file).isDirectory()){
-        isDir = true;
+      try{
+        if(fs.lstatSync(file).isDirectory()){
+          isDir = true;
+        }
+      }catch(e){
+        console.log(e);
       }
+      
       filenames.push({path: file, isDir: isDir});
     });
     res.write(JSON.stringify(filenames));

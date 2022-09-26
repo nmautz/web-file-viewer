@@ -64,7 +64,7 @@ function addFileStaging(){
   fileDiv.appendChild(fileimg);
   fileDiv.appendChild(filenameinput);
 
-  parent.appendChild(fileDiv);
+  parent.insertBefore(fileDiv, parent.firstChild);
 }
 
 
