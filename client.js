@@ -79,7 +79,14 @@ function addFileToDisplay(fileName, fileType){
 
   })
   fileDiv.addEventListener("dblclick", function(){
-    cd(fileName);
+
+    if(fileType == "folder"){
+      cd(fileName);
+
+    }else{
+      downloadWithProgress(fileName)
+    }
+
 
   })
 
@@ -202,6 +209,7 @@ function generate_alert(data) {
 }
 
 function displayFiles(){
+  selected = null;
 
   var maindisplay = document.getElementById("main-display-container");
   while (maindisplay.firstChild){
