@@ -10,12 +10,14 @@ var selected = null;
 
 function addFileToDisplay(fileName, fileType){
   let parent = document.getElementById("main-display-container");
+  
 
   var deletebtn = document.createElement("p");
   deletebtn.classList.add("delete-btn")
   deletebtn.appendChild(document.createTextNode("X"));
 
   var fileDiv = document.createElement("div");
+  fileDiv.id = fileName;
   fileDiv.classList.add("file-display");
   var fileimg = document.createElement("img");
   fileimg.classList.add("file-icon-img");
@@ -66,6 +68,7 @@ function addFileToDisplay(fileName, fileType){
     cd(fileName);
 
   })
+
 
 
 }
@@ -143,6 +146,34 @@ function cd(path){
   })
 }
 
+function openFileBrowser() {
+  let input = document.createElement('input');
+  input.type = 'file';
+  input.onchange = _this => {
+            let files =   Array.from(input.files);
+            console.log(files);
+        };
+  input.click();
+}
+
+
+function download(path){
+
+  openFileBrowser();
+
+/*
+  let url = `${domain}:${port}/api/cd?path=${path}`;
+  window.fetch(url, {
+    method: 'GET'
+  }).then(res => res.text()).then((data)=>{
+    if(data == "OK"){
+      displayFiles();
+    }else{
+      generate_alert(data);
+    }
+  })*/
+}
+
 function generate_alert(data) {
   const alert = document.getElementById("error-alert");
   const alerttext = document.getElementById("error-text");
@@ -190,6 +221,7 @@ function displayFiles(){
 document.addEventListener("DOMContentLoaded", ()=>{
 
 
+  downloadbtn = document.getElementById("download-button");
   addbtn = document.getElementById("add-file-button");
 
   addbtn.addEventListener("click", ()=>{
@@ -203,6 +235,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     cd("../.");
+
+  })
+
+  downloadbtn.addEventListener("click", ()=>{
+
+    download(selected.id);
 
   })
 
