@@ -39,7 +39,13 @@ function addFileToDisplay(fileName, fileType){
   }else{
     parent.appendChild(fileDiv);
   }
-  
+
+
+  deletebtn.addEventListener("click",()=>{
+
+    deletefile(fileName);
+  })
+
 
   fileDiv.addEventListener("click", function(){
 
@@ -63,6 +69,13 @@ function addFileToDisplay(fileName, fileType){
 
 
 }
+
+
+function deletefile(fileName){
+
+}
+
+
 function addFileStaging(){
   let parent = document.getElementById("main-display-container");
 
