@@ -144,6 +144,37 @@ app.get('/api/download', function(req,res){
 
 })
 
+app.get("/api/updateFile", ()=>{
+  try{
+
+    if(req.query.type == 'folder'){
+      fs.rmdirSync(req.query.path);
+
+    }else{
+      fs.unlinkSync("./"+req.query.path);
+    }
+    res.write("OK");
+
+ 
+
+  }catch(e){
+    res.write("ERROR: " +e);
+    console.log("ERROR: " +e);
+  }
+
+  fs.writeFile(req.query.path, "", (err)=>{
+    if (err) {
+      res.write("ERROR: " + err);
+    }else{
+      res.write("OK");
+    }
+  }); 
+
+  res.end();
+
+
+})
+
 
 app.get("/api/zip", (req,res)=>{
 
