@@ -40,9 +40,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
     savebtn.addEventListener("click", ()=>{
         const tarea = document.getElementById("edit-text-area");
 
-        console.log(tarea.value)
+        console.log(encodeURIComponent(tarea.value))
 
-        updateFile(path, tarea.value)
+
+        updateFile(path, encodeURIComponent(tarea.value))
 
     })
 
