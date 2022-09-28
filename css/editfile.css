@@ -1,8 +1,18 @@
 #edit-text-area{
 
-    width: 100%;
+    width: 60%;
     height: 100%;
+
 }
 html, body{
     height: 80vh;
+}
+
+#text-area-container{
+
+    display: flex;
+    justify-content: center;
+    height: 100%;
+
+
 }
