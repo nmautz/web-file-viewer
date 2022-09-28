@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         console.log(encodeURIComponent(tarea.value))
 
 
-        updateFile(path, encodeURIComponent(tarea.value))
+        updateFile(path, tarea.value)
 
     })
 

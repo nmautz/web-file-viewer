@@ -9,6 +9,10 @@ var express = require('express');
 const path = require("path");
 var app = express();
 
+
+app.use(express.json());
+
+
 app.use(cors({
   methods: ["POST"]
 }))
@@ -156,7 +160,7 @@ app.get('/api/download', function(req,res){
 
 })
 
-app.get("/api/updateFile", (req, res)=>{
+app.post("/api/updateFile", (req, res)=>{
   try{
 
     if(req.query.type == 'folder'){
@@ -174,7 +178,9 @@ app.get("/api/updateFile", (req, res)=>{
     console.log("ERROR: " +e);
   }
 
-  fs.writeFile(req.query.path, req.query.contents, (err)=>{
+
+
+  fs.writeFile(req.query.path, req.body.contents, (err)=>{
     if (err) {
       res.write("ERROR: " + err);
     }else{

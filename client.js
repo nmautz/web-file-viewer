@@ -168,9 +168,12 @@ function addFile(name){
 
 function updateFile(path, newContents){
 
-  let url = `${domain}:${port}/api/updateFile?path=${path}&contents=${newContents}`;
+  let url = `${domain}:${port}/api/updateFile?path=${path}`;
   window.fetch(url, {
-    method: 'GET'
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({contents: newContents})
+    
   }).then(res => res.text()).then((data)=>{
     generate_alert(data);
   })
