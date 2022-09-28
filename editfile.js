@@ -11,7 +11,7 @@ function downloadNoSave(path){
     window.fetch(url, {
     method: 'GET'
     }).then(res => res.text()).then((data)=>{
-        output.innerHTML = data;
+        output.value = data;
     })
   }
 
@@ -40,7 +40,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     savebtn.addEventListener("click", ()=>{
         const tarea = document.getElementById("edit-text-area");
 
-        updateFile(path, tarea.innerHTML)
+        console.log(tarea.value)
+
+        updateFile(path, tarea.value)
 
     })
 

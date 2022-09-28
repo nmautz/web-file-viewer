@@ -144,7 +144,7 @@ app.get('/api/download', function(req,res){
 
 })
 
-app.get("/api/updateFile", ()=>{
+app.get("/api/updateFile", (req, res)=>{
   try{
 
     if(req.query.type == 'folder'){
@@ -162,7 +162,7 @@ app.get("/api/updateFile", ()=>{
     console.log("ERROR: " +e);
   }
 
-  fs.writeFile(req.query.path, "", (err)=>{
+  fs.writeFile(req.query.path, req.query.contents, (err)=>{
     if (err) {
       res.write("ERROR: " + err);
     }else{
