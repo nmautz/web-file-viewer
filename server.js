@@ -85,7 +85,7 @@ app.get('/api/deletefile', function(req, res){
   try{
 
     if(req.query.type == 'folder'){
-      fs.rmdirSync(req.query.path);
+      fs.rmdirSync(req.query.path, {recursive: true});
 
     }else{
       fs.unlinkSync("./"+req.query.path);
