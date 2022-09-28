@@ -40,13 +40,22 @@ app.get('/api/getfiles', function(req, res){
 app.get('/api/addFile', function(req, res){
 
 
-  fs.writeFile(req.query.name, "", (err)=>{
-    if (err) {
-      res.write("ERROR: " + err);
-    }else{
-      res.write("OK");
-    }
-  }); 
+  if (fs.existsSync(req.query.name)){
+    res.write("File \"" + req.query.name + "\" already exists!");
+  }else{
+    fs.writeFile(req.query.name, "", (err)=>{
+
+
+
+
+      if (err) {
+        res.write("ERROR: " + err);
+      }else{
+        res.write("OK");
+      }
+    }); 
+  }
+
 
   res.end();
 })
@@ -57,8 +66,11 @@ app.get('/api/addFolder', function(req,res){
   try{
     if (!fs.existsSync(req.query.path)){
       fs.mkdirSync(req.query.path);
+      res.write("OK");
+
+    }else{
+      res.write("Folder \"" + req.query.path + "\" already exists!");
     }
-    res.write("OK");
   }catch(e){
     res.write("ERROR: " + e)
   }

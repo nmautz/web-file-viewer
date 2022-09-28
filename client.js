@@ -157,8 +157,10 @@ function addFile(name){
     if(data != "OK" && data != ""){
       generate_alert(data);
 
+    }else{
+      displayFiles();
+
     }
-    displayFiles();
 
 
   })
